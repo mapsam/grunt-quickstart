@@ -1,0 +1,15 @@
+/* your css */
+/* reset */
+* { box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; }
+
+html, body, ul, ol { margin: 0; padding: 0; }
+
+/* globals */
+a { text-decoration: none; }
+
+/* scaffolding & frameworks */
+section { -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; }
+
+nav { background-color: #111111; }
+
+/*# sourceMappingURL=site.css.map */

@@ -1,14 +1,12 @@
 'use strict';
 
-var path = require('path');
-
 module.exports = function(grunt) {
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     clean: {
       all: {
-        src: ['js/*.js']
+        src: ['src/js/*.js']
       }
     },
     jshint: {
@@ -17,7 +15,7 @@ module.exports = function(grunt) {
     browserify: {
       dist: {
         src: ['src/js/*.js'],
-        dest: 'js/<%= pkg.name%>-<%= pkg.version%>.js'
+        dest: 'dest/static/js/<%= pkg.name%>-<%= pkg.version%>.js'
       }
     },
     uglify: {
@@ -30,21 +28,19 @@ module.exports = function(grunt) {
         }
       }
     },
-    less: {
-        options: {
-          paths: ["src/css"]
+    sass: {                              
+      dist: {                            
+        options: {                       
+          style: 'compact'
         },
-        src: {
-            expand: true,
-            cwd:    "src/css",
-            src:    "main.less",
-            dest:   "dist/css",
-            ext:    ".css"
+        files: {
+          'dest/static/css/site.css': 'src/sass/site.scss'
         }
+      }
     },
     watch: {
       scripts: {
-        files: 'src/css/*.less',
+        files: 'src/sass/*.scss',
         tasks: ['build-css'],
         options: {
           event: [ 'changed', 'added', 'deleted'],
@@ -59,12 +55,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-contrib-sass');
 
   // Default task(s).
   grunt.registerTask('lint', ['jshint']);
-  grunt.registerTask('build-css',['less']);
-  grunt.registerTask('build', ['clean','uglify','less']);
+  grunt.registerTask('build-css',['sass']);
+  grunt.registerTask('build', ['clean','uglify','sass']);
   grunt.registerTask('package', ['build']);
   grunt.registerTask('default', ['build-css']);
   grunt.registerTask('watcher', ['watch']);
