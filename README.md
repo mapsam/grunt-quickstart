@@ -12,7 +12,6 @@
 #### build `grunt build`
 
 Combines a few of the processes if you need to build the site in its entirety. Runs in order `bower`, `lint`, `css`, `uglify`
-* **Bower Injection** - `grunt bower`
 
 #### bower `grunt bower`
 
