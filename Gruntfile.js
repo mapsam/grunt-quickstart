@@ -1,30 +1,20 @@
 'use strict';
 
 module.exports = function(grunt) {
-
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    clean: {
-      all: {
-        src: ['src/js/*.js']
+    wiredep: {
+      target: {
+        src: 'dest/index.html'
       }
     },
     jshint: {
       files: ['src/js/*.js']
     },
-    browserify: {
-      dist: {
-        src: ['src/js/*.js'],
-        dest: 'dest/static/js/<%= pkg.name%>-<%= pkg.version%>.js'
-      }
-    },
     uglify: {
-      options: {
-        banner: '/*! <%= pkg.name %> v<%= pkg.version%> */\n'
-      },
       dist: {
         files: {
-          'js/<%= pkg.name %>-<%= pkg.version%>.min.js': ['js/<%= pkg.name%>-<%= pkg.version%>.js']
+          'dest/static/js/main.js': ['src/js/main.js']
         }
       }
     },
@@ -41,7 +31,7 @@ module.exports = function(grunt) {
     watch: {
       scripts: {
         files: 'src/sass/*.scss',
-        tasks: ['build-css'],
+        tasks: ['css'],
         options: {
           event: [ 'changed', 'added', 'deleted'],
         },
@@ -49,20 +39,20 @@ module.exports = function(grunt) {
     }
   });
 
-  grunt.loadNpmTasks('grunt-contrib-clean');
+  // Loading tasks.
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-wiredep');
 
-  // Default task(s).
+  // Tasks.  
+  grunt.registerTask('default', ['build']);
+  grunt.registerTask('build', ['wiredep', 'jshint', 'sass', 'uglify']);
+  grunt.registerTask('bower', ['wiredep'])
+  grunt.registerTask('css',['sass']);
   grunt.registerTask('lint', ['jshint']);
-  grunt.registerTask('build-css',['sass']);
-  grunt.registerTask('build', ['clean','uglify','sass']);
-  grunt.registerTask('package', ['build']);
-  grunt.registerTask('default', ['build-css']);
   grunt.registerTask('watcher', ['watch']);
 
 };
