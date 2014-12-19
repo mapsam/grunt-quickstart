@@ -9,23 +9,23 @@
 
 # Tasks
 
-#### build
+#### build `grunt build`
 
-`grunt build` combines a few of the processes if you need to build the site in its entirety. Runs in order `bower`, `lint`, `css`, `uglify`
+Combines a few of the processes if you need to build the site in its entirety. Runs in order `bower`, `lint`, `css`, `uglify`
 * **Bower Injection** - `grunt bower`
 
-#### bower
+#### bower `grunt bower`
 
-`grunt bower` finds all of your `bower.js` dependencies using [wiredep](http://stephenplusplus.github.io/grunt-wiredep/) and injects them into `dest/index.html`'s `<head>` where `<!-- bower:js -->` is located.
+Finds all of your `bower.js` dependencies using [wiredep](http://stephenplusplus.github.io/grunt-wiredep/) and injects them into `dest/index.html`'s `<head>` where `<!-- bower:js -->` is located.
 
-#### css
+#### css `grunt css`
 
-`grunt css` compiles all of your [Sass](http://sass-lang.com/) `.scss` files within `src/sass/*.scss` and builds them into `dest/static/css/main.css`. This process defaults to "compacting" the code, but you can change the compression options found in the [Sass docs](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#output_style).
+Compiles all of your [Sass](http://sass-lang.com/) `.scss` files within `src/sass/*.scss` and builds them into `dest/static/css/main.css`. This process defaults to "compacting" the code, but you can change the compression options found in the [Sass docs](http://sass-lang.com/documentation/file.SASS_REFERENCE.html#output_style).
 
-#### lint
+#### lint `grunt lint`
 
-`grunt lint` lints all of your `.js` files within `src/js/*.js`
+Lints all of your `.js` files within `src/js/*.js`
 
-#### watch
+#### watch `grunt watch`
 
-`grunt watch` watches for changes within your `src/sass/*.scss` files then runs `grunt css` to compile all of the changes into your `dest/static/main.css` files.
+Watches for changes within your `src/sass/*.scss` files then runs `grunt css` to compile all of the changes into your `dest/static/main.css` files.
